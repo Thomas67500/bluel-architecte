@@ -19,24 +19,7 @@ console.table (infoImage);
 
 listeImage() 
 
-/*for (let i = 0; i < listeImage.length; i++) {
-    let article = listeImage[i];
-    let gallery= document.querySelector(".gallery");
-    let figure= document.createElement("figure");
-    let img= document.createElement("img");
-    let figCaption= document.createElement("figcaption");
-    let categoryId = document.createElement("article");
 
-    img.setAttribute("src", listeImage[i].image.url);
-    img.setAttribute("alt", listeImage[i].title);
-    img.setAttribute("crossoring","anonymous");
-
-    figcaption.innerHTML= listeImage[i].title;
-
-    figure.append(img,figcaption);
-    gallery.append(figure);
-
-} */
 
    
 
