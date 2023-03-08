@@ -43,6 +43,7 @@ let textebouton = document.createElement("texte");
 
 
 bouton.setAttribute("btn",id);
+bouton.style.backgroundColor="red";
 
 textebouton.append(nom);
 bouton.append(id);
