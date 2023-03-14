@@ -8,6 +8,14 @@ for (let i = 0; i < infoCategorie.length; i++) {
 nom = infoCategorie[i].name;
 id= infoCategorie[i].id;
 affichageBouton(id,nom);
+
+let bouton= document.querySelector(".bouton1");
+bouton.addEventListener("click",function(){
+ affichageProjet(srcValue, figCaptionValue,idCategorie);
+ //if() {}
+ //else () {}
+});
+
 }}
 
 
@@ -23,24 +31,11 @@ console.log(btn);
 btn.innerText =nom;
 position.append(btn);
 
-/*btn.style.fontFamily="Syne";
-btn.style.fontWeight="700";
-btn.style.fontSize="16px";
-btn.style.textAlign="Center";
-
-btn.style.height="37px";
-btn.style.width="198px";
-btn.style.border="1px";
-btn.style.borderColor="#1D6154";
-btn.style.borderRadius="60px";*/
 
 
-//btn.style.backgroundColor="white";
 }
 
-//let test = document.getElementsByClassName("bouton2");
-//test.style.backgroundColor="white";                                  undefined
-//console.log(test);
+
 
 
 
@@ -56,7 +51,7 @@ async function listeProjet() {
         figCaptionValue = infoImage[i].title;
         idCategorie= infoImage[i].categoryId;
         affichageProjet(srcValue, figCaptionValue,idCategorie);
-        
+       
         
     }
 }
