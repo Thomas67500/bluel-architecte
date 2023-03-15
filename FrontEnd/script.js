@@ -9,14 +9,11 @@ nom = infoCategorie[i].name;
 id= infoCategorie[i].id;
 affichageBouton(id,nom);
 
-let bouton= document.querySelector(".bouton1");
-bouton.addEventListener("click",function(){
- affichageProjet(srcValue, figCaptionValue,idCategorie);
- //if() {}
- //else () {}
-});
 
-}}
+
+}
+
+ }
 
 
 listeCategories()
@@ -25,14 +22,20 @@ listeCategories()
 function affichageBouton (id,nom) {
 
 let position = document.querySelector(".gallery");
+let portfolio=document.querySelector("#portfolio");
+let blocBouton= document.createElement("div");
 let btn= document.createElement("button");
-btn.setAttribute("class","bouton"+ id);
+btn.setAttribute("class","bouton");
 console.log(btn);
 btn.innerText =nom;
-position.append(btn);
+blocBouton.append(btn);
+portfolio.insertBefore(blocBouton,position);
+btn.addEventListener("click",function(){
+ listeProjet(id)
 
 
 
+})
 }
 
 
@@ -41,26 +44,43 @@ position.append(btn);
 
 
 
-async function listeProjet() {
+async function listeProjet(idCategorie=0) {
 
     let response = await fetch("http://localhost:5678/api/works")
-    let infoImage = await response.json()
-        console.table (infoImage);
-    for (let i = 0; i < infoImage.length; i++) {
-        srcValue = infoImage[i].imageUrl;
-        figCaptionValue = infoImage[i].title;
-        idCategorie= infoImage[i].categoryId;
-        affichageProjet(srcValue, figCaptionValue,idCategorie);
-       
+    let infoProjet = await response.json()
+       // console.table (infoProjet);
+        let gallery = document.querySelector(".gallery")
+        
+        //if (idCategorie!=0) 
+        nettoyage(gallery)
+
+    for (let i = 0; i < infoProjet.length; i++) {
+        if(infoProjet[i].categoryId==idCategorie){
+
+
+        
+        srcValue = infoProjet[i].imageUrl;
+        figCaptionValue = infoProjet[i].title;
+        idCategorie= infoProjet[i].categoryId;
+        affichageProjet(srcValue, figCaptionValue);
+    }
+     else if(idCategorie==0){
+        console.log("idCategorie"+idCategorie)
+        srcValue = infoProjet[i].imageUrl;
+        figCaptionValue = infoProjet[i].title;
+        idCategorie= infoProjet[i].categoryId;
+        affichageProjet(srcValue, figCaptionValue);
+
+     }  
         
     }
 }
 
 
-listeProjet()
+listeProjet(0)
 
 
-function affichageProjet(srcValue, figCaptionValue,idCategorie) {
+function affichageProjet(srcValue, figCaptionValue) {
 
     let gallery = document.querySelector(".gallery");
     console.log(gallery);
@@ -70,7 +90,7 @@ function affichageProjet(srcValue, figCaptionValue,idCategorie) {
     let figCaption = document.createElement("figCaption");
 
    
-    figure.setAttribute("class",idCategorie);
+    //figure.setAttribute("class","");
     img.setAttribute("src",srcValue);
     figCaption.textContent = figCaptionValue;
     gallery.append(figure);
@@ -79,10 +99,11 @@ function affichageProjet(srcValue, figCaptionValue,idCategorie) {
 
 }
 
-//let boutonTous = document.querySelector(".bouton0");
-//boutonTous.onclick = () => {
-//};
-
+function nettoyage(element) {
+    while (element.firstChild) {
+        element.removeChild(element.firstChild);
+    }
+}
 
 
 
