@@ -145,6 +145,43 @@ li:hover {
 	width: 100%;
 
 }
+.gallery{ 
+
+	display: grid;
+	
+}
+
+.button{
+
+	display: flex;
+	flex-direction: row;
+}
+
+.bouton {
+	
+width: 30%;
+height: 37px;
+border: 1px solid #1D6154;
+border-radius: 60px;
+background-color: white;
+font-family: 'Syne';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 19px;
+text-align: center;
+color: #1D6154;
+
+}
+.bouton:active{
+color: white;
+background-color: #1D6154;
+
+
+
+
+}
+
 #contact {
 	width: 50%;
 margin: auto;
@@ -193,4 +230,6 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+
+
 
