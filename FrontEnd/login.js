@@ -15,10 +15,19 @@ body:JSON.stringify({
     email : email,
     password : password,
 }),
-
 })
 .then (res => res.json())
 .then(data=> console.log(data))
+.then ((data) => {
+const login = JSON.stringify(data);
+window.localStorage.setItem("token",login);
+console.log(localStorage);
+const arrayString = localStorage.getItem("login");
+const token = JSON.parse(arrayString);
+console.log(token);
+});
+
+
 
 
 
