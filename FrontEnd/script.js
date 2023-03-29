@@ -1,19 +1,23 @@
 
+
+
  async function listeCategories () {
  let response= await fetch ("http://localhost:5678/api/categories")
  let infoCategorie = await response.json()
 console.table (infoCategorie);
-affichageBouton(0,"Tous"); 
+let position = document.querySelector(".gallery");
+let portfolio=document.querySelector("#portfolio");
+let blocBouton= document.createElement("div");
+let btn = affichageBouton(0,"Tous"); 
+blocBouton.append(btn);
+portfolio.insertBefore(blocBouton,position); 
 for (let i = 0; i < infoCategorie.length; i++) {
 nom = infoCategorie[i].name;
 id= infoCategorie[i].id;
-affichageBouton(id,nom);
-
-
-
-}
-
- }
+let btn=affichageBouton(id,nom);
+blocBouton.append(btn);
+portfolio.insertBefore(blocBouton,position); 
+}}
 
 
 listeCategories()
@@ -21,21 +25,16 @@ listeCategories()
 
 function affichageBouton (id,nom) {
 
-let position = document.querySelector(".gallery");
-let portfolio=document.querySelector("#portfolio");
-let blocBouton= document.createElement("div");
+
 let btn= document.createElement("button");
 btn.setAttribute("class","bouton");
 console.log(btn);
 btn.innerText =nom;
-blocBouton.append(btn);
-portfolio.insertBefore(blocBouton,position);
 btn.addEventListener("click",function(){
+
  listeProjet(id)
-
-
-
 })
+return btn;
 }
 
 
@@ -48,10 +47,8 @@ async function listeProjet(idCategorie=0) {
 
     let response = await fetch("http://localhost:5678/api/works")
     let infoProjet = await response.json()
-       // console.table (infoProjet);
         let gallery = document.querySelector(".gallery")
         
-        //if (idCategorie!=0) 
         nettoyage(gallery)
 
     for (let i = 0; i < infoProjet.length; i++) {
@@ -61,14 +58,12 @@ async function listeProjet(idCategorie=0) {
         
         srcValue = infoProjet[i].imageUrl;
         figCaptionValue = infoProjet[i].title;
-        idCategorie= infoProjet[i].categoryId;
         affichageProjet(srcValue, figCaptionValue);
     }
      else if(idCategorie==0){
         console.log("idCategorie"+idCategorie)
         srcValue = infoProjet[i].imageUrl;
         figCaptionValue = infoProjet[i].title;
-        idCategorie= infoProjet[i].categoryId;
         affichageProjet(srcValue, figCaptionValue);
 
      }  
@@ -90,7 +85,7 @@ function affichageProjet(srcValue, figCaptionValue) {
     let figCaption = document.createElement("figCaption");
 
    
-    //figure.setAttribute("class","");
+
     img.setAttribute("src",srcValue);
     figCaption.textContent = figCaptionValue;
     gallery.append(figure);
@@ -108,6 +103,41 @@ function nettoyage(element) {
 
 
 
+let modal = null
+
+const openModal = function (e) {
+e.preventDefault()
+const target = document.querySelector(e.target.getAttribute("href"))
+target.style.display = null
+target.removeAttribute("aria-hidden")
+target.setAttribute("aria-modal","true")
+modal =target
+modal.addEventListener("click", closeModal)
+modal.querySelector(".js-modal-close").addEventListener("click",closeModal)
+modal.querySelector(".js-modal-stop").addEventListener("click",stopPropagation)
+modal = null
+}
+
+const closeModal = function (e) {
+    if (modal === null) return
+e.preventDefault()
+modal.style.display = "none"
+modal.setAttribute("aria-hidden","true")
+modal.removeAttribute("aria-modal")
+modal.removeEventListener("click", closeModal)
+modal.querySelector(".js-modal-close").removeEventListener("click", closeModal)
+modal.querySelector(".js-modal-stop").removeEventListener("click",stopPropagation)
+modal = null
+}
+
+const stopPropagation = function (e) {
+     e.stopPropagation()
+}
+
+document.querySelectorAll (".js-modal").forEach(a => {
+a.addEventListener("click",openModal)
+
+})
 
 
 
