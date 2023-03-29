@@ -151,11 +151,7 @@ li:hover {
 	
 }
 
-.button{
 
-	display: flex;
-	flex-direction: row;
-}
 
 .bouton {
 	
@@ -224,12 +220,95 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
-
-footer nav ul {
+.motdePasse{
 	display: flex;
-	justify-content: flex-end;
-	margin: 2em
+	justify-content: center;
+	text-decoration: underline;
+}
+
+.error{
+	color: red;
 }
 
 
 
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	margin: 2em;
+}
+
+
+.head-token {
+	display: none;
+}
+
+.projets-modifier{
+    display: flex;
+    justify-content: center;
+     
+}
+
+.modal {
+
+	position : fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top:0; 
+	left:0;
+	width: 100%;
+	height: 100%;
+	background : rgba(0, 0,0,0.8);
+	}
+
+	.bloc-modal {
+		overflow: auto;
+		width : 600px;
+		padding : 20px;
+		background-color : #fff;
+		
+
+	}
+	
+	.head{
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+
+
+	.head-modifier{
+		display: flex;
+		justify-content: center;
+		height: 59px;
+        width: 100%;
+        left: 0px;
+        top: 0px;
+        border-radius: 0px;
+        background: #000000;
+        color: #fff;
+		align-items: center;
+		margin-bottom: 2em;
+		display: none;
+	}
+	
+    .bouton-head{
+		height: 38px;
+		width: 216px;
+		left: 688px;
+		top: 10px;
+		border-radius: 60px;
+		background: #FFFFFF;
+        color: black;
+		align-items: center;
+		display: flex;
+		justify-content: center;
+
+
+	}
+
+	.head-base{
+		display: flex;
+		justify-content: space-between;
+	}
