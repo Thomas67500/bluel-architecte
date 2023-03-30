@@ -48,6 +48,7 @@ async function listeProjet(idCategorie=0) {
     let response = await fetch("http://localhost:5678/api/works")
     let infoProjet = await response.json()
         let gallery = document.querySelector(".gallery")
+        console.log(infoProjet);
         
         nettoyage(gallery)
 
@@ -59,12 +60,14 @@ async function listeProjet(idCategorie=0) {
         srcValue = infoProjet[i].imageUrl;
         figCaptionValue = infoProjet[i].title;
         affichageProjet(srcValue, figCaptionValue);
+        affichageGalerie(srcValue);
     }
      else if(idCategorie==0){
         console.log("idCategorie"+idCategorie)
         srcValue = infoProjet[i].imageUrl;
         figCaptionValue = infoProjet[i].title;
         affichageProjet(srcValue, figCaptionValue);
+        affichageGalerie(srcValue);
 
      }  
         
@@ -90,6 +93,7 @@ function affichageProjet(srcValue, figCaptionValue) {
     figCaption.textContent = figCaptionValue;
     gallery.append(figure);
     figure.append(img, figCaption);
+    
 
 
 }
@@ -107,8 +111,8 @@ let modal = null
 
 const openModal = function (e) {
 e.preventDefault()
-const target = document.querySelector(e.target.getAttribute("href"))
-target.style.display = null
+const target = document.querySelector("#modal1")
+target.style.display ="flex"
 target.removeAttribute("aria-hidden")
 target.setAttribute("aria-modal","true")
 modal =target
@@ -119,7 +123,8 @@ modal = null
 }
 
 const closeModal = function (e) {
-    if (modal === null) return
+    const modal = document.querySelector("#modal1")   
+    if  (modal === null) return
 e.preventDefault()
 modal.style.display = "none"
 modal.setAttribute("aria-hidden","true")
@@ -141,4 +146,53 @@ a.addEventListener("click",openModal)
 
 
 
+ // creation connst pour index modifier//
+const headModifier = document.querySelector(".head-modifier");
+const login = document.querySelector(".login");
+const logout = document.querySelector(".logout");
+const sousPhoto = document.querySelector(".sous-photo");
+const jsModal = document.querySelector(".js-modal");
 
+
+ // funtion pour afficher index modifier en cas de token//
+function  loginIndex() {
+
+if (localStorage.getItem("token")){
+ headModifier.style.display ="inherit"
+ login.style.display="none"
+ logout.style.display="inherit"
+ sousPhoto.style.display="inherit"
+ jsModal.style.display="inherit"
+
+}
+ else{
+   console.error("Pas de token"); }
+ 
+}
+
+loginIndex()
+
+
+
+let GalerieImage= document.createElement("div");
+GalerieImage.setAttribute("class","galerie-image");
+
+function affichageGalerie(srcValue){
+    
+    let titreModal = document.querySelector(".titre-modal");
+    let figure = document.createElement("figure");
+    let img = document.createElement("img");
+    let figCaption = document.createElement("figCaption");
+
+    img.setAttribute("src",srcValue);
+    figCaption.textContent= "éditer";
+    GalerieImage.append(figure);
+    figure.append(img,figCaption);
+    titreModal.insertAdjacentElement("afterend",GalerieImage);
+    
+
+
+ img.style.width="78px";
+ img.style.height="104px";
+
+}
