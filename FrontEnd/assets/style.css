@@ -265,6 +265,7 @@ footer nav ul {
 	.bloc-modal {
 		overflow: auto;
 		width : 600px;
+		height: 732px;
 		padding : 20px;
 		background-color : #fff;
 		
