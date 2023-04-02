@@ -1,12 +1,20 @@
 
-
 const form = document.getElementById("form");
 
 form.addEventListener("submit", e =>{
 e.preventDefault();
+const error = document.querySelector(".error");
+ error.style.display ="none";
 
 const email = document.getElementById("email").value;
 const password = document.getElementById("pass").value;
+
+  if ((email =="") && (password =="")) {
+    error.innerHTML="Nom d'utilisateur ou mot de passe erroné";
+    error.style.display="block";
+
+  }
+
 
 fetch("http://localhost:5678/api/users/login",{
 method:"POST",
@@ -17,14 +25,26 @@ body:JSON.stringify({
 }),
 })
 .then (res => res.json())
-.then(data=> console.log(data))
 .then ((data) => {
-const login = JSON.stringify(data);
-window.localStorage.setItem("token",login);
-console.log(localStorage);
-const arrayString = localStorage.getItem("login");
-const token = JSON.parse(arrayString);
-console.log(token);
+ const login = JSON.stringify(data);
+ window.localStorage.setItem("token",login);
+  const arrayString = localStorage.getItem("token");
+  const token = JSON.parse(arrayString);
+  console.log(token);
+
+  if ((email == "sophie.bluel@test.tld" ) && (password == "S0phie")) {
+     location.href = "index.html";
+  } 
+ else { 
+    error.innerHTML="Nom d'utilisateur ou mot de passe erroné";
+    error.style.display="block";
+  
+  
+  
+ }
+
+
+
 });
 
 
@@ -40,10 +60,23 @@ console.log(token);
 
 
 
+// nouveau code a test :
+
+
+// const login = JSON.stringify(data);
+// console.log();
+// const Jparse = JSON.parse(login)
+// console.log(Jparse);
+//  window.localStorage.setItem("token",Jparse["token"]);
+//   const tokenSeul = localStorage.getItem("token");
+// console.log(tokenSeul);
 
 
 
+//code originel :
 
-
-
-
+// const login = JSON.stringify(data);
+// window.localStorage.setItem("token",login);
+//  const arrayString = localStorage.getItem("token");
+//  const token = JSON.parse(arrayString);
+// console.log(token);
