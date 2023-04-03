@@ -26,11 +26,10 @@ body:JSON.stringify({
 })
 .then (res => res.json())
 .then ((data) => {
- const login = JSON.stringify(data);
- window.localStorage.setItem("token",login);
-  const arrayString = localStorage.getItem("token");
-  const token = JSON.parse(arrayString);
-  console.log(token);
+  window.sessionStorage.setItem("token",data.token);
+   const tokenSeul = sessionStorage.getItem("token");
+ console.log(tokenSeul);
+
 
   if ((email == "sophie.bluel@test.tld" ) && (password == "S0phie")) {
      location.href = "index.html";
