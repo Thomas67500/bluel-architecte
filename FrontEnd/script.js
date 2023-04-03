@@ -1,4 +1,6 @@
-
+let urlApi = "http://localhost:5678/api/"
+let token = sessionStorage.getItem("token")
+console.log(token);
 
 
  async function listeCategories () {
@@ -8,6 +10,7 @@ console.table (infoCategorie);
 let position = document.querySelector(".gallery");
 let portfolio=document.querySelector("#portfolio");
 let blocBouton= document.createElement("div");
+blocBouton.setAttribute("class","bloc-bouton");
 let btn = affichageBouton(0,"Tous"); 
 blocBouton.append(btn);
 portfolio.insertBefore(blocBouton,position); 
@@ -47,8 +50,8 @@ async function listeProjet(idCategorie=0) {
 
     let response = await fetch("http://localhost:5678/api/works")
     let infoProjet = await response.json()
+    console.table(infoProjet);
         let gallery = document.querySelector(".gallery")
-        console.log(infoProjet);
         
         nettoyage(gallery)
 
@@ -66,8 +69,9 @@ async function listeProjet(idCategorie=0) {
         console.log("idCategorie"+idCategorie)
         srcValue = infoProjet[i].imageUrl;
         figCaptionValue = infoProjet[i].title;
+        idValue = infoProjet[i].id;
         affichageProjet(srcValue, figCaptionValue);
-        affichageGalerie(srcValue);
+        affichageGalerie(srcValue, idValue);
 
      }  
         
@@ -146,7 +150,7 @@ a.addEventListener("click",openModal)
 
 
 
- // creation connst pour index modifier//
+ // creation const pour index modifier//
 const headModifier = document.querySelector(".head-modifier");
 const login = document.querySelector(".login");
 const logout = document.querySelector(".logout");
@@ -154,10 +158,10 @@ const sousPhoto = document.querySelector(".sous-photo");
 const jsModal = document.querySelector(".js-modal");
 
 
- // funtion pour afficher index modifier en cas de token//
+ // fonction pour afficher index modifier en cas de token//
 function  loginIndex() {
 
-if (localStorage.getItem("token")){
+if (sessionStorage.getItem("token")){
  headModifier.style.display ="inherit"
  login.style.display="none"
  logout.style.display="inherit"
@@ -177,22 +181,46 @@ loginIndex()
 let GalerieImage= document.createElement("div");
 GalerieImage.setAttribute("class","galerie-image");
 
-function affichageGalerie(srcValue){
+// affichage des images dans la modale
+function affichageGalerie(srcValue,idValue){
     
     let titreModal = document.querySelector(".titre-modal");
     let figure = document.createElement("figure");
     let img = document.createElement("img");
     let figCaption = document.createElement("figCaption");
+    let iconeCorbeille= document.createElement("button");
+    iconeCorbeille.setAttribute("class","icone-supprimer");
+    iconeCorbeille.innerHTML= '<i class="fa-solid fa-trash-can"></i>';
+    figure.setAttribute("class","image-modal");
 
     img.setAttribute("src",srcValue);
+    img.setAttribute("class",idValue);
     figCaption.textContent= "éditer";
     GalerieImage.append(figure);
-    figure.append(img,figCaption);
+    figure.append(img,figCaption,iconeCorbeille);
     titreModal.insertAdjacentElement("afterend",GalerieImage);
+
+    iconeCorbeille.addEventListener("click",function(){
+
+       fetch (urlApi +"works/" + idValue, {
+        
+        method : "DELETE",
+        headers : {
+            "Autorization" : "Bearer + ${token}"
+        }
+       })
+
+    .then (e =>
+        {
+
+        nettoyage(figure)
+        
+    })
+    }
+    )
     
 
 
- img.style.width="78px";
- img.style.height="104px";
+
 
 }
