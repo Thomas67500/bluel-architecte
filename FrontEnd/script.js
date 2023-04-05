@@ -206,8 +206,8 @@ function affichageGalerie(srcValue,idValue){
         
         method : "DELETE",
         headers : {
-            "Autorization" : "Bearer + ${token}"
-        }
+            Authorization: `Bearer ${token}` 
+        },
        })
 
     .then (e =>
