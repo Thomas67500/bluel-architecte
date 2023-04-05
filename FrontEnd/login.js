@@ -9,11 +9,13 @@ const error = document.querySelector(".error");
 const email = document.getElementById("email").value;
 const password = document.getElementById("pass").value;
 
-  if ((email =="") && (password =="")) {
+  if ((email ==="") || (password ==="")) {
     error.innerHTML="Nom d'utilisateur ou mot de passe erroné";
     error.style.display="block";
 
-  }
+  } 
+  else
+  {
 
 
 fetch("http://localhost:5678/api/users/login",{
@@ -26,31 +28,39 @@ body:JSON.stringify({
 })
 .then (res => res.json())
 .then ((data) => {
+  if (data.token != undefined){
   window.sessionStorage.setItem("token",data.token);
    const tokenSeul = sessionStorage.getItem("token");
- console.log(tokenSeul);
+   console.log(tokenSeul);
+   location.href = "index.html";
+  }
 
+ else if (data.message != undefined){
 
-  if ((email == "sophie.bluel@test.tld" ) && (password == "S0phie")) {
-     location.href = "index.html";
-  } 
- else { 
-    error.innerHTML="Nom d'utilisateur ou mot de passe erroné";
-    error.style.display="block";
-  
-  
-  
+ error.innerHTML= data.message
+ error.style.display= "block"; 
+
  }
+ else {
+
+   error.innerHTML="Nom d'utilisateur ou mot de passe erroné";
+   error.style.display="block";
+ 
+ 
+ 
+}
+
+})
 
 
 
-});
+);
 
 
 
 
 
-});
+
 
 
 
