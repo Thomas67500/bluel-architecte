@@ -215,7 +215,8 @@ modal2.removeEventListener("click", closeModal2)
 
 
 const modal2 = document.querySelector(".js-modal2")
-    modal2.addEventListener("click",openModal2);
+    modal2.addEventListener("click",openModal2)
+    modal2.addEventListener("click",closeModal)
 
     
     
