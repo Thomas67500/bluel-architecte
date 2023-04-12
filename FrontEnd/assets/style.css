@@ -446,16 +446,59 @@ margin-bottom: 2em;
 	flex-direction: column;
 	justify-content: center;
     background: #E8F1F6;
+	margin-left: 7em;
+	margin-top: 3em;
 }
 
 .bloc-photo i {
-	height: 46px;
-width: 58px;
+width: 100%;
+display: flex;
+justify-content: center;
 left: 0px;
 top: 6px;
 border-radius: 0px;
 font-size: 5em;
+margin-top: 0.5em;
 
+}
+
+
+
+
+.bouton-menu{
+	display: flex;
+	justify-content: space-between;
+}
+
+.retour-modal1{
+	background: none;
+	border: none;
+	font-size: 20px;
+}
+
+.js-modal-close2{
+
+background: none;
+border: none;
+font-size: 20px;
+}
+
+.titre-photo{
+	display: flex;
+	justify-content: center;
+	font-family: Work Sans;
+font-size: 26px;
+font-weight: 400;
+line-height: 30px;
+letter-spacing: 0em;
+text-align: center;
+
+}
+
+form-photo{
+
+display: flex;
+flex-direction: column;	
 }
 
 output{
@@ -467,6 +510,8 @@ output{
 	gap: 15px;
 	position: relative;
 	border-radius: 5px;
+	display: flex;
+	justify-content: center;
   }
   
   output .image{
@@ -498,3 +543,73 @@ output{
   output .span--hidden{
 	visibility: hidden;
   }
+  
+  .bouton-upload{
+	height: 36px;
+    width: 173px;
+    left: 633px;
+    top: 881px;
+    border-radius: 50px;
+    background: #CBD6DC;
+    border: none;
+	margin-left: 8em;
+	align-items: center;
+	font-family: Work Sans;
+font-size: 14px;
+font-weight: 500;
+line-height: 16px;
+letter-spacing: 0em;
+text-align: center;
+color: #306685;
+
+  }
+
+  .texte-upload{
+	display: flex;
+	margin-left: 10em;
+	margin-top: 0.5em;
+  }
+
+  .titre-form{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+  }
+
+  .categories-form{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+  }
+
+#titre-requis{
+	height: 51px;
+left: 510px;
+top: 1011px;
+border-radius: 0px;
+margin-top: 0.5em;
+margin-bottom: 2em;
+background: #FFFFFF;
+box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+border: none;
+
+  }
+
+#categories{
+height: 51px;
+left: 510px;
+top: 1109px;
+
+background: #FFFFFF;
+box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+margin-top: 1em;
+border: none;
+}
+
+.bouton-valider{
+	display: flex;
+	color: #A7A7A7;
+	border: none;
+	height: 36px;
+	justify-content: center;
+}
