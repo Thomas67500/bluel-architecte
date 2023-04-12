@@ -179,10 +179,10 @@ const stopPropagation = function (e) {
      e.stopPropagation()
 }
 
-document.querySelectorAll (".js-modal").forEach(a => {
-a.addEventListener("click",openModal)
+const modal1 =document.querySelector(".js-modal")
+modal1.addEventListener("click",openModal)
 
-})
+
 
 
 
@@ -201,23 +201,25 @@ modal = null
 }
 
 const closeModal2 = function (e) {
-    const modal = document.querySelector("#modal2")   
-    if  (modal === null) return
+    const modal2 = document.querySelector("#modal2")   
+    if  (modal2 === null) return
 e.preventDefault()
-modal.style.display = "none"
-modal.setAttribute("aria-hidden","true")
-modal.removeAttribute("aria-modal")
-modal.removeEventListener("click", closeModal2)
-modal.querySelector(".js-modal-close").removeEventListener("click", closeModal2)
-modal.querySelector(".js-modal-stop").removeEventListener("click",stopPropagation)
-modal = null
+modal2.style.display = "none"
+modal2.setAttribute("aria-hidden","true")
+modal2.removeAttribute("aria-modal")
+modal2.removeEventListener("click", closeModal2)
+//modal.querySelector(".js-modal-close").removeEventListener("click", closeModal2)
+//modal2.querySelector(".js-modal-stop").removeEventListener("click",stopPropagation)
+//modal2 = null
 }
 
 
-document.querySelectorAll (".js-modal2").forEach(a => {
-    a.addEventListener("click",openModal2)
+const modal2 = document.querySelector(".js-modal2")
+    modal2.addEventListener("click",openModal2);
+
     
-    })
+    
+
 
 
 
@@ -330,11 +332,25 @@ function affichageGalerie(srcValue,idValue){
 
 }
 
+const afficherModal2=  document.querySelector(".js-modal2");
+afficherModal2.addEventListener("click",()=>{
+
+    
+})
+
+//retour vers modal 1 //
+
+const retourModal1= document.querySelector(".retour-modal1");
+retourModal1.addEventListener("click",closeModal2)
+
+
 // faire fonctionner bouton ajouter photo//
 
-// document.querySelector("bouton-upload").addEventListener("click",() => {
-//  document.getElementById("upload-image").click();
-// })
+ document.querySelector(".bouton-upload").addEventListener("click",() => {
+  document.getElementById("upload-image").addEventListener("click",()=>{
+    
+  });
+ })
 
 // faire le select des categories//
 
@@ -348,7 +364,8 @@ function affichageGalerie(srcValue,idValue){
  .then(data =>{
  let output ="";
  data.forEach(categorie =>{
-     output += `<option class="${categorie.id}">${categorie.name}</option>`;
+    console.log(categorie);
+     output += `<option value="${categorie.id}">${categorie.name}</option>`;
  })
  selectCategorie.innerHTML= output;
  })
@@ -366,9 +383,19 @@ const form = document.getElementById("form-photo");
 form.addEventListener("submit",function(e){
 e.preventDefault();
 
-const test =new FormData(form)
+const test =new FormData(form);
 
 console.log([...test])
+
+fetch("http://localhost:5678/api/works",{
+method: "POST",
+body: test,
+
+
+
+})
+.then (res => res.json())
+.then (res=> console.log(res));
 
 
 })
