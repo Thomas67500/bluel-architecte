@@ -79,15 +79,17 @@
 				</div>
 				<div class="bloc-photo">
 				 <!-- faire ici upload photo-->
-				 <form action="" method="post" class="form-photo">
+				 <form action="" method="post" id="form-photo">
 			
 				 <output> <i class="fa-regular fa-image"></i></output>
-				 <input type="file" accept="image/jpeg, image/png, image/jpg">
-				 <span>jpg,png : 4mo max</span>
+				 <input type="file" accept="image/jpeg, image/png, image/jpg" id="upload-image">
+				 <button class="bouton-upload" style="display: none;"> + Ajouter Photo </button>
+				 <span class="texte-upload">jpg,png : 4mo max</span>
+				</div>
 				
 				 <div class="titre-form">
 				 <label for="titre"> Titre</label>
-				 <input type="text" name="titre" id="Titre requis" autocomplete="off">
+				 <input type="text" name="titre" id="titre-requis" autocomplete="off">
 				 </div>
 				 
 				 <div class="categories-form">
@@ -99,7 +101,7 @@
 				 <input type="submit" value="Valider" class="bouton-valider">
 			
 				</form>
-				 </div>
+				
 				</div>	 
 				 </aside>	 
 			 <button class="supprimer-galerie">Supprimer la galerie</button>
