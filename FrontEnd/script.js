@@ -63,7 +63,7 @@ async function listeProjet(idCategorie=0) {
         srcValue = infoProjet[i].imageUrl;
         figCaptionValue = infoProjet[i].title;
         affichageProjet(srcValue, figCaptionValue);
-        affichageGalerie(srcValue);
+        
     }
      else if(idCategorie==0){
         console.log("idCategorie"+idCategorie)
@@ -71,12 +71,48 @@ async function listeProjet(idCategorie=0) {
         figCaptionValue = infoProjet[i].title;
         idValue = infoProjet[i].id;
         affichageProjet(srcValue, figCaptionValue);
+        
+
+     }  
+        
+    }
+}
+
+
+async function listeProjetModal(idCategorie=0) {
+    let response = await fetch("http://localhost:5678/api/works")
+    let infoProjet = await response.json()
+    console.table(infoProjet);
+    let GalerieImage= document.createElement("div");
+    GalerieImage.setAttribute("class","galerie-image");
+        
+        
+
+    for (let i = 0; i < infoProjet.length; i++) {
+        if(infoProjet[i].categoryId==idCategorie){
+
+
+        
+        srcValue = infoProjet[i].imageUrl;
+        figCaptionValue = infoProjet[i].title;
+        affichageGalerie(srcValue);
+    }
+     else if(idCategorie==0){
+        console.log("idCategorie"+idCategorie)
+        srcValue = infoProjet[i].imageUrl;
+        figCaptionValue = infoProjet[i].title;
+        idValue = infoProjet[i].id;
         affichageGalerie(srcValue, idValue);
 
      }  
         
     }
 }
+
+listeProjetModal()
+
+    
+
 
 
 listeProjet(0)
@@ -150,12 +186,80 @@ a.addEventListener("click",openModal)
 
 
 
+const openModal2 = function(e){
+    e.preventDefault()
+    const target2 = document.querySelector("#modal2")
+    target2.style.display="flex"
+    target2.removeAttribute("aria-hidden")
+    target2.setAttribute("aria-modal","true")
+    modal =target2
+modal.addEventListener("click", closeModal2)
+modal.querySelector(".js-modal-close2").addEventListener("click",closeModal2)
+modal.querySelector(".js-modal-stop2").addEventListener("click",stopPropagation)
+modal = null
+   
+}
+
+const closeModal2 = function (e) {
+    const modal = document.querySelector("#modal2")   
+    if  (modal === null) return
+e.preventDefault()
+modal.style.display = "none"
+modal.setAttribute("aria-hidden","true")
+modal.removeAttribute("aria-modal")
+modal.removeEventListener("click", closeModal2)
+modal.querySelector(".js-modal-close").removeEventListener("click", closeModal2)
+modal.querySelector(".js-modal-stop").removeEventListener("click",stopPropagation)
+modal = null
+}
+
+
+document.querySelectorAll (".js-modal2").forEach(a => {
+    a.addEventListener("click",openModal2)
+    
+    })
+
+
+
+// java input// 
+const input = document.querySelector("input")
+const output = document.querySelector("output")
+let imagesArray = []
+
+//supprimer l'image de l'apperçu//
+function deleteImage(index) {
+    imagesArray.splice(index, 1)
+    displayImages()
+  }
+
+// afficher l'image//
+function displayImages() {
+    let images = ""
+    imagesArray.forEach((image, index) => {
+        images += `<div class="image">
+                <img src="${URL.createObjectURL(image)}" alt="image">
+                <span onclick="deleteImage(${index})">&times;</span>
+              </div>`
+    
+    })
+    output.innerHTML = images
+  }
+
+
+input.addEventListener("change", function() {
+const file= input.files
+imagesArray.push(file[0])
+displayImages()
+  
+})
+
  // creation const pour index modifier//
 const headModifier = document.querySelector(".head-modifier");
 const login = document.querySelector(".login");
 const logout = document.querySelector(".logout");
 const sousPhoto = document.querySelector(".sous-photo");
 const jsModal = document.querySelector(".js-modal");
+const jsModal2 = document.querySelector(".js-modal2");
 
 
  // fonction pour afficher index modifier en cas de token//
@@ -167,6 +271,7 @@ if (sessionStorage.getItem("token")){
  logout.style.display="inherit"
  sousPhoto.style.display="inherit"
  jsModal.style.display="inherit"
+ jsModal2.style.display="inherit"
 
 }
  else{
@@ -224,3 +329,35 @@ function affichageGalerie(srcValue,idValue){
 
 
 }
+
+
+
+// faire le select des categories//
+
+ document.addEventListener('DOMContentLoaded',() =>{
+ const selectCategorie= document.querySelector("#categories");
+
+ fetch("http://localhost:5678/api/categories")
+ .then(res =>{
+     return res.json();
+ })
+ .then(data =>{
+ let output ="";
+ data.forEach(categorie =>{
+     output += `<option class="${categorie.id}">${categorie.name}</option>`;
+ })
+ selectCategorie.innerHTML= output;
+ })
+ .catch(err=> {
+     console.log(err);
+})
+ });
+
+
+
+// envoie des donnees modal 2//
+
+const form = document.querySelector("form-photo");
+
+const formData = new FormData
+
