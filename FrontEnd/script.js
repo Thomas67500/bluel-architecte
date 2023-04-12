@@ -78,7 +78,7 @@ async function listeProjet(idCategorie=0) {
     }
 }
 
-
+ // affichage des images dans la premiere modal //
 async function listeProjetModal(idCategorie=0) {
     let response = await fetch("http://localhost:5678/api/works")
     let infoProjet = await response.json()
@@ -330,7 +330,11 @@ function affichageGalerie(srcValue,idValue){
 
 }
 
+// faire fonctionner bouton ajouter photo//
 
+// document.querySelector("bouton-upload").addEventListener("click",() => {
+//  document.getElementById("upload-image").click();
+// })
 
 // faire le select des categories//
 
@@ -357,7 +361,15 @@ function affichageGalerie(srcValue,idValue){
 
 // envoie des donnees modal 2//
 
-const form = document.querySelector("form-photo");
+const form = document.getElementById("form-photo");
 
-const formData = new FormData
+form.addEventListener("submit",function(e){
+e.preventDefault();
+
+const test =new FormData(form)
+
+console.log([...test])
+
+
+})
 
