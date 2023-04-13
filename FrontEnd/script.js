@@ -216,7 +216,7 @@ modal2.removeEventListener("click", closeModal2)
 
 const modal2 = document.querySelector(".js-modal2")
     modal2.addEventListener("click",openModal2)
-    modal2.addEventListener("click",closeModal)
+    // modal2.addEventListener("click",closeModal)
 
     
     
@@ -380,23 +380,30 @@ retourModal1.addEventListener("click",closeModal2)
 // envoie des donnees modal 2//
 
 const form = document.getElementById("form-photo");
+const titre = document.getElementById("titre-requis");
+const image = document.getElementById("upload-image");
+const boutonValider = document.querySelector("bouton-valide");
+const categories = document.getElementById("categories");
 
 form.addEventListener("submit",function(e){
-e.preventDefault();
+    e.preventDefault();
 
-const test =new FormData(form);
+let formData =new FormData(form);
 
-console.log([...test])
+console.log([...formData,])
+formData.append("title",titre.value);
+// formData.append("image",image.files[0]);
+formData.append("category",categories.value);
 
 fetch("http://localhost:5678/api/works",{
 method: "POST",
-body: test,
-
-
-
+headers: {Authorization :`Bearer ${token}`},
+body: formData,
 })
 .then (res => res.json())
-.then (res=> console.log(res));
+.then (res=> console.log(res))
+.then (document.location.reload())
+.then(affichageProjet());
 
 
 })
