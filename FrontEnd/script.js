@@ -152,14 +152,17 @@ let modal = null
 const openModal = function (e) {
 e.preventDefault()
 const target = document.querySelector("#modal1")
+const target2 = document.querySelector("#modal2")
 target.style.display ="flex"
 target.removeAttribute("aria-hidden")
 target.setAttribute("aria-modal","true")
+target2.style.display="none"
 modal =target
 modal.addEventListener("click", closeModal)
 modal.querySelector(".js-modal-close").addEventListener("click",closeModal)
 modal.querySelector(".js-modal-stop").addEventListener("click",stopPropagation)
 modal = null
+
 }
 
 const closeModal = function (e) {
@@ -189,15 +192,16 @@ modal1.addEventListener("click",openModal)
 const openModal2 = function(e){
     e.preventDefault()
     const target2 = document.querySelector("#modal2")
+    const target1 = document.querySelector("#modal1")
     target2.style.display="flex"
     target2.removeAttribute("aria-hidden")
     target2.setAttribute("aria-modal","true")
+    target1.style.display="none"
     modal =target2
 modal.addEventListener("click", closeModal2)
 modal.querySelector(".js-modal-close2").addEventListener("click",closeModal2)
 modal.querySelector(".js-modal-stop2").addEventListener("click",stopPropagation)
 modal = null
-   
 }
 
 const closeModal2 = function (e) {
@@ -205,6 +209,7 @@ const closeModal2 = function (e) {
     if  (modal2 === null) return
 e.preventDefault()
 modal2.style.display = "none"
+
 modal2.setAttribute("aria-hidden","true")
 modal2.removeAttribute("aria-modal")
 modal2.removeEventListener("click", closeModal2)
@@ -216,10 +221,13 @@ modal2.removeEventListener("click", closeModal2)
 
 const modal2 = document.querySelector(".js-modal2")
     modal2.addEventListener("click",openModal2)
-    // modal2.addEventListener("click",closeModal)
 
     
-    
+ 
+//retour vers modal 1 //
+
+const retourModal1= document.querySelector(".retour-modal1");
+retourModal1.addEventListener("click",openModal)
 
 
 
@@ -227,6 +235,7 @@ const modal2 = document.querySelector(".js-modal2")
 // java input// 
 const input = document.querySelector("input")
 const output = document.querySelector("output")
+const imagePreview = document.querySelector(".test")
 let imagesArray = []
 
 //supprimer l'image de l'apperçu//
@@ -236,6 +245,7 @@ function deleteImage(index) {
   }
 
 // afficher l'image//
+
 function displayImages() {
     let images = ""
     imagesArray.forEach((image, index) => {
@@ -333,25 +343,9 @@ function affichageGalerie(srcValue,idValue){
 
 }
 
-const afficherModal2=  document.querySelector(".js-modal2");
-afficherModal2.addEventListener("click",()=>{
-
-    
-})
-
-//retour vers modal 1 //
-
-const retourModal1= document.querySelector(".retour-modal1");
-retourModal1.addEventListener("click",closeModal2)
 
 
-// faire fonctionner bouton ajouter photo//
 
- document.querySelector(".bouton-upload").addEventListener("click",() => {
-  document.getElementById("upload-image").addEventListener("click",()=>{
-    
-  });
- })
 
 // faire le select des categories//
 
@@ -374,6 +368,50 @@ retourModal1.addEventListener("click",closeModal2)
      console.log(err);
 })
  });
+
+
+
+
+
+ const boutonSubmit= document.querySelector(".bouton-valider")
+ const formTitre = document.getElementById("titre-requis")
+ const formSelect = document.getElementById("categories")
+ const formPhoto = document.getElementById("form-photo")
+
+
+ // pour verifier si il y a des inputs dans les forms 
+formTitre.addEventListener("keyup",boutonActiver);
+formSelect.addEventListener("keyup",boutonActiver);
+
+
+
+
+ // bouton submit desactiver de base 
+function boutonDesactiver () {
+boutonSubmit.disabled=true;
+}
+
+boutonSubmit.addEventListener("click", boutonDesactiver);
+
+
+
+//fonction pour changer la couleur du bouton submit si le form est rempli
+formTitre.addEventListener("keyup",boutonActiver);
+formSelect.addEventListener("keyup",boutonActiver);
+
+function boutonActiver (){
+
+    if ((formTitre.value===null && formTitre.value==="") || (formSelect.value===null && formSelect.value==="") || (formPhoto.value===null && formPhoto.value==="")) {
+
+        return
+    }
+    else{
+        boutonSubmit.removeEventListener("click",boutonDesactiver);
+        boutonSubmit.style.backgroundColor= "#1D6154";
+        
+    }
+
+}
 
 
 
