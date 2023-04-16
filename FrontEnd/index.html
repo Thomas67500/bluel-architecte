@@ -25,7 +25,7 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li class="login">login</li>
+			<li class="login"> <a href="login.html">login</a></li>
 			<li class="logout" style="display:none;">logout</li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
@@ -55,7 +55,7 @@
 
 	<div class="projets-modifier">
 	<h2>Mes Projets</h2> 
-    <a href="#modal1" class="js-modal"> <i class="fa-regular fa-pen-to-square"></i>modifier</a>
+    <a href="#modal1" class="js-modal" style="display: none;"> <i class="fa-regular fa-pen-to-square"></i>modifier</a>
 	</div>
 		<div class="gallery">	
 		</div>
@@ -70,48 +70,50 @@
 		   
 		  <div class="footer-modal1">
 			  <a href="#modal2" class="js-modal2"> Ajouter une photo </a>
-			  <aside id="modal2" class="modal" aria-hidden="true" role="dialog" style="display:none;">
-			  <div class="bloc-modal js-modal-stop2">
-			   <div class="bloc-header">
-				  <div class="bouton-menu">
-					  <button class="retour-modal1"> <i class="fa-solid fa-arrow-left"></i> </button>
-					  <button class="js-modal-close2"> 
-					  <i class="fa-solid fa-xmark"></i> 
-					  </button>
-				  </div>
-				<span class="titre-photo"> Ajout Photo </span>
-			  </div>
-			  <div class="bloc-photo">
-			   <!-- faire ici upload photo-->
-			   <form action="" method="post" id="form-photo">
-		  
-			   <output> <i class="fa-regular fa-image"></i></output>
-			   <input type="file" accept="image/jpeg, image/png, image/jpg" id="upload-image" name="image" class="bouton-upload" >
-			   <button class="bouton-upload" style="display: none;"> + Ajouter Photo </button>
-			   <span class="texte-upload">jpg,png : 4mo max</span>
-			  </div>
-			  
-			   <div class="titre-form">
-			   <label for="titre"> Titre</label>
-			   <input type="text" name="titre" id="titre-requis" autocomplete="off">
-			   </div>
-			   
-			   <div class="categories-form">
-			   <label for="categorie">Catégorie</label>
-			   <select id ="categories" name="categories"> </select>
-			  </div>
-		  
-		  
-			   <input type="submit" value="Valider" class="bouton-valider">
-		  
-			  </form>
-			  
-			  </div>	 
-			   </aside>	 
+			 
 		   <button class="supprimer-galerie">Supprimer la galerie</button>
 		  </div> 
 		</div>
 	  </aside>
+	  <aside id="modal2" class="modal" aria-hidden="true" role="dialog" style="display:none;">
+		<div class="bloc-modal js-modal-stop2">
+		 <div class="bloc-header">
+			<div class="bouton-menu">
+				<button class="retour-modal1"> <i class="fa-solid fa-arrow-left"></i> </button>
+				<button class="js-modal-close2"> 
+				<i class="fa-solid fa-xmark"></i> 
+				</button>
+			</div>
+		  <span class="titre-photo"> Ajout Photo </span>
+		</div>
+		<div class="bloc-photo">
+		 <!-- faire ici upload photo-->
+		 <form action="" method="post" id="form-photo">
+	
+		 <output> <i class="fa-regular fa-image test" ></i></output>
+		 <input type="file" accept="image/jpeg, image/png, image/jpg" id="upload-image" name="image" class="bouton-upload" style="display: none;">
+		 <label for="upload-image" class="bouton-upload"> + Ajouter Photo </label>
+		
+		 <span class="texte-upload">jpg,png : 4mo max</span>
+		</div>
+		
+		 <div class="titre-form">
+		 <label for="titre"> Titre</label>
+		 <input type="text" name="titre" id="titre-requis" autocomplete="off">
+		 </div>
+		 
+		 <div class="categories-form">
+		 <label for="categorie">Catégorie</label>
+		 <select id ="categories" name="categories"> </select>
+		</div>
+	
+	
+		 <input type="submit" value="Valider" class="bouton-valider">
+	
+		</form>
+		
+		</div>	 
+		 </aside>	 
 
 
 
