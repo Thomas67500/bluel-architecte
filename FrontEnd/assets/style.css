@@ -59,6 +59,16 @@ header {
 	justify-content: space-between;
 	margin: 50px 0
 }
+.login a:hover {
+	text-decoration: none;
+	color: inherit;
+	
+	
+	
+}
+.login a:link{
+	text-decoration: none;
+}
 section {
 	margin: 50px 0
 }
@@ -218,11 +228,15 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+
+.loginPage{
+	font-weight: bold;
+}
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
-	background-color: #1D6154;
+	background-color: gray;
 	margin : 2em auto ;
 	width: 180px;
 	text-align: center;
@@ -258,10 +272,12 @@ footer nav ul {
      
 }
 
-.js-modal {
+.js-modal  {
 position: relative;
 left: 2em;
-
+text-decoration: none;
+color: black;
+font-size: 16px;
 }
 
 .modal {
@@ -308,6 +324,10 @@ left: 2em;
 		margin-bottom: 2em;
 		display: none;
 	}
+	.head-modifier i{
+		position:relative;
+		right: 10px;
+	}
 	
     .bouton-head{
 		height: 38px;
@@ -320,6 +340,8 @@ left: 2em;
 		align-items: center;
 		display: flex;
 		justify-content: center;
+		font-weight: bold;
+		margin-left: 1em;
 
 
 	}
@@ -544,7 +566,11 @@ output{
 	visibility: hidden;
   }
   
-  .bouton-upload{
+
+
+   .bouton-upload{
+	display: flex;
+	justify-content: center;
 	height: 36px;
     width: 173px;
     left: 633px;
@@ -561,8 +587,9 @@ line-height: 16px;
 letter-spacing: 0em;
 text-align: center;
 color: #306685;
+font-weight: bold;
 
-  }
+  } 
 
   .texte-upload{
 	display: flex;
@@ -580,6 +607,8 @@ color: #306685;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+	border-bottom: solid 1px gray;
+	padding-bottom: 3em;
   }
 
 #titre-requis{
