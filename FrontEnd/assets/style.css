@@ -23,6 +23,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 	
+	
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -57,7 +58,7 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	
 }
 .login a:hover {
 	text-decoration: none;
@@ -166,6 +167,7 @@ li:hover {
 
 	position: relative;
 	left: 4em;
+	top: 1em;
 }
 
 
@@ -236,12 +238,15 @@ input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
-	background-color: gray;
+	/* background-color: #1D6154; */
 	margin : 2em auto ;
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
 }
+
+
+
 .motdePasse{
 	display: flex;
 	justify-content: center;
@@ -358,6 +363,11 @@ font-size: 16px;
 	width: 100%;
 }
 
+.modifier-article{
+	position: relative;
+	bottom: 1em;
+}
+
 .image-modal img{
 	width:78px;
     height:104px;
@@ -460,7 +470,7 @@ margin-bottom: 2em;
 .bloc-photo{
 
 	height: 250px;
-    width: 420px;
+    width: 70%;
     left: 510px;
     top: 786px;
     border-radius: 3px;
@@ -572,7 +582,7 @@ output{
 	display: flex;
 	justify-content: center;
 	height: 36px;
-    width: 173px;
+    width: 45%;
     left: 633px;
     top: 881px;
     border-radius: 50px;
@@ -638,7 +648,22 @@ border: none;
 .bouton-valider{
 	display: flex;
 	color: #A7A7A7;
+	background-color: gray;
 	border: none;
 	height: 36px;
 	justify-content: center;
+}
+
+.envoyer-login{
+
+	background-color: #1D6154;
+}
+
+
+@media all and (min-width: 1px) and (max-width:411px) {
+
+.head {
+	width: auto;
+}
+
 }
