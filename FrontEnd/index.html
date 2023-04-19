@@ -36,15 +36,17 @@
 <main>
 	<section id="introduction">
 		<figure>
+			
 			<img src="./assets/images/sophie-bluel.png" alt="">
 		<div class="sous-photo" style="display:none;">
-			<i class="fa-regular fa-pen-to-square"></i> 
-			<span>modifier</span>
+			<span> <i class="fa-regular fa-pen-to-square"></i> modifier </span>
 		</div>
+		
 
 		</figure>
 
 		<article>
+			<span class="modifier-article" style="display:none;"><i class="fa-regular fa-pen-to-square"></i> modifier </span>
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
@@ -75,6 +77,7 @@
 		  </div> 
 		</div>
 	  </aside>
+	  
 	  <aside id="modal2" class="modal" aria-hidden="true" role="dialog" style="display:none;">
 		<div class="bloc-modal js-modal-stop2">
 		 <div class="bloc-header">
@@ -92,7 +95,7 @@
 	
 		 <output> <i class="fa-regular fa-image test" ></i></output>
 		 <input type="file" accept="image/jpeg, image/png, image/jpg" id="upload-image" name="image" class="bouton-upload" style="display: none;">
-		 <label for="upload-image" class="bouton-upload"> + Ajouter Photo </label>
+		 <label for="upload-image"  id="label-upload" class="bouton-upload"> + Ajouter Photo </label>
 		
 		 <span class="texte-upload">jpg,png : 4mo max</span>
 		</div>
