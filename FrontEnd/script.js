@@ -1,12 +1,12 @@
 let urlApi = "http://localhost:5678/api/"
 let token = sessionStorage.getItem("token")
-console.log(token);
+//console.log(token);
 
 
  async function listeCategories () {
  let response= await fetch ("http://localhost:5678/api/categories")
  let infoCategorie = await response.json()
-console.table (infoCategorie);
+//console.table (infoCategorie);
 let position = document.querySelector(".gallery");
 let portfolio=document.querySelector("#portfolio");
 let blocBouton= document.createElement("div");
@@ -20,22 +20,27 @@ id= infoCategorie[i].id;
 let btn=affichageBouton(id,nom);
 blocBouton.append(btn);
 portfolio.insertBefore(blocBouton,position); 
+if (sessionStorage.getItem("token")){
+blocBouton.style.display="none"
+
+}
 }}
 
 
 listeCategories()
 
-
+// afficher les boutons sur l'index
 function affichageBouton (id,nom) {
 
 
 let btn= document.createElement("button");
 btn.setAttribute("class","bouton");
-console.log(btn);
+//console.log(btn);
 btn.innerText =nom;
 btn.addEventListener("click",function(){
 
  listeProjet(id)
+ 
 })
 return btn;
 }
@@ -50,7 +55,7 @@ async function listeProjet(idCategorie=0) {
 
     let response = await fetch("http://localhost:5678/api/works")
     let infoProjet = await response.json()
-    console.table(infoProjet);
+    //console.table(infoProjet);
         let gallery = document.querySelector(".gallery")
         
         nettoyage(gallery)
@@ -66,7 +71,7 @@ async function listeProjet(idCategorie=0) {
         
     }
      else if(idCategorie==0){
-        console.log("idCategorie"+idCategorie)
+       //console.log("idCategorie"+idCategorie)
         srcValue = infoProjet[i].imageUrl;
         figCaptionValue = infoProjet[i].title;
         idValue = infoProjet[i].id;
@@ -82,9 +87,10 @@ async function listeProjet(idCategorie=0) {
 async function listeProjetModal(idCategorie=0) {
     let response = await fetch("http://localhost:5678/api/works")
     let infoProjet = await response.json()
-    console.table(infoProjet);
+    //console.table(infoProjet);
     let GalerieImage= document.createElement("div");
     GalerieImage.setAttribute("class","galerie-image");
+    
         
         
 
@@ -98,7 +104,7 @@ async function listeProjetModal(idCategorie=0) {
         affichageGalerie(srcValue);
     }
      else if(idCategorie==0){
-        console.log("idCategorie"+idCategorie)
+        //console.log("idCategorie"+idCategorie)
         srcValue = infoProjet[i].imageUrl;
         figCaptionValue = infoProjet[i].title;
         idValue = infoProjet[i].id;
@@ -109,7 +115,7 @@ async function listeProjetModal(idCategorie=0) {
     }
 }
 
-listeProjetModal()
+listeProjetModal(0)
 
     
 
@@ -121,7 +127,7 @@ listeProjet(0)
 function affichageProjet(srcValue, figCaptionValue) {
 
     let gallery = document.querySelector(".gallery");
-    console.log(gallery);
+    //console.log(gallery);
 
     let figure = document.createElement("figure");
     let img = document.createElement("img");
@@ -151,6 +157,9 @@ let modal = null
 
 const openModal = function (e) {
 e.preventDefault()
+const GallerieModal= document.querySelector(".galerie-image")
+    nettoyage(GallerieModal)
+listeProjetModal(0)
 const target = document.querySelector("#modal1")
 const target2 = document.querySelector("#modal2")
 target.style.display ="flex"
@@ -161,7 +170,7 @@ modal =target
 modal.addEventListener("click", closeModal)
 modal.querySelector(".js-modal-close").addEventListener("click",closeModal)
 modal.querySelector(".js-modal-stop").addEventListener("click",stopPropagation)
-modal = null
+//modal = null
 
 }
 
@@ -169,13 +178,14 @@ const closeModal = function (e) {
     const modal = document.querySelector("#modal1")   
     if  (modal === null) return
 e.preventDefault()
+listeProjet(0)
 modal.style.display = "none"
 modal.setAttribute("aria-hidden","true")
 modal.removeAttribute("aria-modal")
 modal.removeEventListener("click", closeModal)
 modal.querySelector(".js-modal-close").removeEventListener("click", closeModal)
 modal.querySelector(".js-modal-stop").removeEventListener("click",stopPropagation)
-modal = null
+//modal = null
 }
 
 const stopPropagation = function (e) {
@@ -191,6 +201,7 @@ modal1.addEventListener("click",openModal)
 
 const openModal2 = function(e){
     e.preventDefault()
+    initModal2()
     const target2 = document.querySelector("#modal2")
     const target1 = document.querySelector("#modal1")
     target2.style.display="flex"
@@ -201,7 +212,7 @@ const openModal2 = function(e){
 modal.addEventListener("click", closeModal2)
 modal.querySelector(".js-modal-close2").addEventListener("click",closeModal2)
 modal.querySelector(".js-modal-stop2").addEventListener("click",stopPropagation)
-modal = null
+//modal = null
 }
 
 const closeModal2 = function (e) {
@@ -238,41 +249,42 @@ const output = document.querySelector("output")
 const imagePreview = document.querySelector(".test")
 let imagesArray = []
 
-//supprimer l'image de l'apperçu//
-function deleteImage(index) {
-    imagesArray.splice(index, 1)
-    displayImages()
-  }
+
 
 // afficher l'image//
+const boutonUpload= document.getElementById("label-upload")
+    const texteUpload= document.querySelector(".texte-upload")
 
-function displayImages() {
+function displayImages(image) {
     let images = ""
-    imagesArray.forEach((image, index) => {
-        images += `<div class="image">
+        images = `<div class="image">
                 <img src="${URL.createObjectURL(image)}" alt="image">
-                <span onclick="deleteImage(${index})">&times;</span>
               </div>`
-    
-    })
+
     output.innerHTML = images
+   if ((output.innnerHTML= images)) {
+     boutonUpload.style.display="none"
+     texteUpload.style.display="none"
+    }
+    
   }
 
 
 input.addEventListener("change", function() {
 const file= input.files
-imagesArray.push(file[0])
-displayImages()
+displayImages(file[0])
   
 })
 
  // creation const pour index modifier//
 const headModifier = document.querySelector(".head-modifier");
+const modifierArticle= document.querySelector(".modifier-article");
 const login = document.querySelector(".login");
 const logout = document.querySelector(".logout");
 const sousPhoto = document.querySelector(".sous-photo");
 const jsModal = document.querySelector(".js-modal");
 const jsModal2 = document.querySelector(".js-modal2");
+
 
 
  // fonction pour afficher index modifier en cas de token//
@@ -285,10 +297,10 @@ if (sessionStorage.getItem("token")){
  sousPhoto.style.display="inherit"
  jsModal.style.display="inherit"
  jsModal2.style.display="inherit"
+ modifierArticle.style.display="inherit"
 
 }
- else{
-   console.error("Pas de token"); }
+
  
 }
 
@@ -359,7 +371,7 @@ function affichageGalerie(srcValue,idValue){
  .then(data =>{
  let output ="";
  data.forEach(categorie =>{
-    console.log(categorie);
+    //console.log(categorie);
      output += `<option value="${categorie.id}">${categorie.name}</option>`;
  })
  selectCategorie.innerHTML= output;
@@ -377,6 +389,11 @@ function affichageGalerie(srcValue,idValue){
  const formTitre = document.getElementById("titre-requis")
  const formSelect = document.getElementById("categories")
  const formPhoto = document.getElementById("form-photo")
+//  const boutonUpload= document.querySelector(".bouton-upload")
+//  const texteUpload= document.querySelector(".texte-upload")
+
+
+
 
 
  // pour verifier si il y a des inputs dans les forms 
@@ -413,6 +430,18 @@ function boutonActiver (){
 
 }
 
+// function enlever bouton envoie fichier
+
+// function cacherBoutonImage(){
+//     if ((formPhoto.file =! null && formPhoto.file!="")) {
+//         boutonUpload.style.display="none"
+//         texteUpload.style.display="none"
+//     }
+// else{
+//     return
+// }
+    
+// }
 
 
 // envoie des donnees modal 2//
@@ -428,7 +457,7 @@ form.addEventListener("submit",function(e){
 
 let formData =new FormData(form);
 
-console.log([...formData,])
+//console.log([...formData,])
 formData.append("title",titre.value);
 // formData.append("image",image.files[0]);
 formData.append("category",categories.value);
@@ -439,10 +468,18 @@ headers: {Authorization :`Bearer ${token}`},
 body: formData,
 })
 .then (res => res.json())
-.then (res=> console.log(res))
-.then (document.location.reload())
-.then(affichageProjet());
-
-
+.then (res=> {
+    //console.log(res)
+    listeProjet(0)
+    closeModal2(e)
+ 
+})
 })
 
+function initModal2() {
+
+    output.innerHTML= '<i class="fa-regular fa-image test" ></i>'
+    document.getElementById("titre-requis").value=""
+    boutonUpload.style.display="inline-grid"
+        texteUpload.style.display="inherit"
+}
