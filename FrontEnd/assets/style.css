@@ -63,12 +63,22 @@ header {
 .login a:hover {
 	text-decoration: none;
 	color: inherit;
-	
-	
-	
+}
+.projets a:hover {
+	text-decoration: none;
+	color: inherit;
 }
 .login a:link{
 	text-decoration: none;
+}
+.projets a:link{
+	text-decoration: none;
+}
+.login a:visited{
+	color: inherit;
+}
+.projets a:visited{
+	color: inherit;
 }
 section {
 	margin: 50px 0
@@ -263,6 +273,12 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em;
+}
+
+.footer-login{
+	position: absolute;
+	bottom: 0;
+	right: 0;
 }
 
 
@@ -658,6 +674,29 @@ border: none;
 
 	background-color: #1D6154;
 }
+
+
+@media all and (min-width: 689px) and (max-width:817px){
+.bloc-bouton{
+	
+	width: 95%;
+	justify-content: center;
+
+}
+
+
+}
+
+@media all and (min-width: 1px) and (max-width:688px){
+	.bloc-bouton{
+		display: grid;
+		width: 95%;
+		justify-content: center;
+	
+	}
+	
+	
+	}
 
 
 @media all and (min-width: 1px) and (max-width:411px) {
