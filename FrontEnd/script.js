@@ -128,9 +128,6 @@ function nettoyage(element) {
     }
 }
 
-
-
-
  // permet l'ouverture de la premiere modal 
 let modal = null
 const openModal = function (e) {
@@ -150,7 +147,6 @@ modal.querySelector(".js-modal-close").addEventListener("click",closeModal)
 modal.querySelector(".js-modal-stop").addEventListener("click",stopPropagation)
 
 }
-
 
 //fermeture de la premiere modal
 const closeModal = function (e) {
@@ -176,9 +172,6 @@ const stopPropagation = function (e) {
 const modal1 =document.querySelector(".js-modal")
 modal1.addEventListener("click",openModal)
 
-
-
-
 //permet l'ouverture de la modal2 
 const openModal2 = function(e){
     e.preventDefault()
@@ -193,7 +186,6 @@ const openModal2 = function(e){
 modal.addEventListener("click", closeModal2)
 modal.querySelector(".js-modal-close2").addEventListener("click",closeModal2)
 modal.querySelector(".js-modal-stop2").addEventListener("click",stopPropagation)
-//modal = null
 }
 
 //ferme la modal 2
@@ -212,8 +204,6 @@ modal2.removeEventListener("click", closeModal2)
 // ouvre la modal2
 const modal2 = document.querySelector(".js-modal2")
     modal2.addEventListener("click",openModal2)
-
-    
  
 //retour vers modal 1 //
 
@@ -221,10 +211,8 @@ const retourModal1= document.querySelector(".retour-modal1");
 retourModal1.addEventListener("click",openModal)
 
 
-
-
 // afficher l'image dans la modal2 //
-const input = document.querySelector("input")
+const input = document.getElementById("upload-image")
 const output = document.querySelector("output")
 const imagePreview = document.querySelector(".test")
 let imagesArray = []
@@ -271,13 +259,9 @@ if (sessionStorage.getItem("token")){
  modifierArticle.style.display="inherit"
 
 }
-
- 
 }
 
 loginIndex()
-
-
 
 let GalerieImage= document.createElement("div");
 GalerieImage.setAttribute("class","galerie-image");
@@ -319,16 +303,7 @@ function affichageGalerie(srcValue,idValue){
     })
     }
     )
-    
-
-
-
-
 }
-
-
-
-
 
 // faire le select des categories//
 
@@ -342,7 +317,7 @@ function affichageGalerie(srcValue,idValue){
  .then(data =>{
  let output ="";
  data.forEach(categorie =>{
-    //console.log(categorie);
+    
      output += `<option value="${categorie.id}">${categorie.name}</option>`;
  })
  selectCategorie.innerHTML= output;
@@ -353,83 +328,43 @@ function affichageGalerie(srcValue,idValue){
  });
 
 
-
-
-
  const boutonSubmit= document.querySelector(".bouton-valider")
  const formTitre = document.getElementById("titre-requis")
  const formSelect = document.getElementById("categories")
  const formPhoto = document.getElementById("form-photo")
-//  const boutonUpload= document.querySelector(".bouton-upload")
-//  const texteUpload= document.querySelector(".texte-upload")
 
-
-
-
-
- // pour verifier si il y a des inputs dans les forms 
-formTitre.addEventListener("keyup",boutonActiver);
-formSelect.addEventListener("keyup",boutonActiver);
-
-
-
-
- // bouton submit desactiver de base 
-function boutonDesactiver () {
-boutonSubmit.disabled=true;
-}
-
-boutonSubmit.addEventListener("click", boutonDesactiver);
-
-
+ 
 
 //fonction pour changer la couleur du bouton submit si le form est rempli
 formTitre.addEventListener("keyup",boutonActiver);
-formSelect.addEventListener("keyup",boutonActiver);
+input.addEventListener("change",boutonActiver)
 
 function boutonActiver (){
 
-    if ((formTitre.value===null && formTitre.value==="") || (formSelect.value===null && formSelect.value==="") || (formPhoto.value===null && formPhoto.value==="")) {
+    if ((formTitre.value===null && formTitre.value==="") || (formSelect.value===null && formSelect.value==="") ) {
 
-        return
+        boutonSubmit.disabled=true;
     }
-    else{
-        boutonSubmit.removeEventListener("click",boutonDesactiver);
-        boutonSubmit.style.backgroundColor= "#1D6154";
+    else {
+        boutonSubmit.disabled=false;
         
     }
 
 }
 
-// function enlever bouton envoie fichier
-
-// function cacherBoutonImage(){
-//     if ((formPhoto.file =! null && formPhoto.file!="")) {
-//         boutonUpload.style.display="none"
-//         texteUpload.style.display="none"
-//     }
-// else{
-//     return
-// }
-    
-// }
-
 
 // envoie des donnees modal 2//
 
 const form = document.getElementById("form-photo");
-const titre = document.getElementById("titre-requis");
-const image = document.getElementById("upload-image");
-const boutonValider = document.querySelector("bouton-valide");
-const categories = document.getElementById("categories");
+
 
 form.addEventListener("submit",function(e){
     e.preventDefault();
 
 let formData =new FormData(form);
 
-formData.append("title",titre.value);
-formData.append("category",categories.value);
+formData.append("title",formTitre.value);
+formData.append("category",formSelect.value);
 
 fetch("http://localhost:5678/api/works",{
 method: "POST",
@@ -447,9 +382,12 @@ body: formData,
 
 
 function initModal2() {
-
+    
     output.innerHTML= '<i class="fa-regular fa-image test" ></i>'
     document.getElementById("titre-requis").value=""
+    document.getElementById("upload-image").value=""
     boutonUpload.style.display="inline-grid"
-        texteUpload.style.display="inherit"
+    boutonSubmit.disabled=true
+    texteUpload.style.display="inherit"     
+        
 }
