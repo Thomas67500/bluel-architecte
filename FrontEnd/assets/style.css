@@ -248,7 +248,7 @@ input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
-	/* background-color: #1D6154; */
+	 background-color: #1D6154;
 	margin : 2em auto ;
 	width: 180px;
 	text-align: center;
@@ -664,10 +664,12 @@ border: none;
 .bouton-valider{
 	display: flex;
 	color: #A7A7A7;
-	background-color: gray;
 	border: none;
 	height: 36px;
 	justify-content: center;
+}
+.bouton-valider[disabled]{
+	background-color: gray;
 }
 
 .envoyer-login{
