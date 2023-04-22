@@ -26,8 +26,6 @@ form.addEventListener("submit", e => {
             .then((data) => {
                 if (data.token != undefined) {
                     window.sessionStorage.setItem("token", data.token);
-                    const tokenSeul = sessionStorage.getItem("token");
-                    console.log(tokenSeul);
                     location.href = "index.html";
                 } else if (data.message != undefined) {
 
@@ -64,23 +62,3 @@ form.addEventListener("submit", e => {
 
 
 
-// nouveau code a test :
-
-
-// const login = JSON.stringify(data);
-// console.log();
-// const Jparse = JSON.parse(login)
-// console.log(Jparse);
-//  window.localStorage.setItem("token",Jparse["token"]);
-//   const tokenSeul = localStorage.getItem("token");
-// console.log(tokenSeul);
-
-
-
-//code originel :
-
-// const login = JSON.stringify(data);
-// window.localStorage.setItem("token",login);
-//  const arrayString = localStorage.getItem("token");
-//  const token = JSON.parse(arrayString);
-// console.log(token);
