@@ -332,21 +332,25 @@ function affichageGalerie(srcValue,idValue){
  const formTitre = document.getElementById("titre-requis")
  const formSelect = document.getElementById("categories")
  const formPhoto = document.getElementById("form-photo")
+ const titrePhoto = document.querySelector(".photo-titre")
 
- 
+
 
 //fonction pour changer la couleur du bouton submit si le form est rempli
-formTitre.addEventListener("keyup",boutonActiver);
+
 input.addEventListener("change",boutonActiver)
+formTitre.addEventListener("keyup",boutonActiver)
+
 
 function boutonActiver (){
 
-    if ((formTitre.value===null && formTitre.value==="") || (formSelect.value===null && formSelect.value==="") ) {
+    if (( formTitre.value!=="") && (input.value!=="")) {
 
-        boutonSubmit.disabled=true;
+        boutonSubmit.disabled=false;
     }
     else {
-        boutonSubmit.disabled=false;
+        boutonSubmit.disabled=true;
+        
         
     }
 
